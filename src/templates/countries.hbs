@@ -1,16 +1,15 @@
-name.official - полное имя страны
+{{!-- name.official - полное имя страны
 capital - столица
 population - население
 flags.svg - ссылка на изображение флага
-languages - массив языков
-<div class="coutry">
-    <div class="coutry__block">
-        <img src="{{flags.svg}}" alt="{{name.official}}" width="40" height="60">
-        <h1 class="coutry__title">{{name.official}}</h1>
+languages - массив языков --}}
+    <div class="country-info__block">
+        <img src="{{flags.svg}}" alt="{{name.official}}" width="80" height="60">
+        <h1 class="country-info__title">{{name.official}}</h1>
     </div>
-    <ul class="country__list">
-        <li class="country__item">Столиця: {{capital}}</li>
-        <li class="country__item">Населення: {{population}}</li>
-        <li class="country__item">Офіційна мова: {{languages}}</li>
+    <ul class="country-info__list">
+        <li class="country-info__item">Столиця: {{capital}}</li>
+        <li class="country-info__item">Населення: {{population}}</li>
+        <li class="country-info__item">Офіційна мова:{{#each languages}}<p>{{language}}</p> {{/each}}</li>
     </ul>
-</div>
+
