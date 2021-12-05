@@ -10,6 +10,6 @@ languages - массив языков --}}
     <ul class="country-info__list">
         <li class="country-info__item">Столиця: {{capital}}</li>
         <li class="country-info__item">Населення: {{population}}</li>
-        <li class="country-info__item">Офіційна мова:{{#each languages}}<p>{{language}}</p> {{/each}}</li>
+        <li class="country-info__item">Офіційна мова:{{#each languages}}<p>мова:{{languages.values}}</p> {{/each}}</li>
     </ul>
 
