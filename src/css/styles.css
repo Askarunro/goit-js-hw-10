@@ -38,3 +38,7 @@ body {
   flex-wrap: wrap;
   align-items: center;
 }
+
+.hidden {
+  display: none;
+}

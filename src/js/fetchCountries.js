@@ -1,6 +1,7 @@
 import debounce from 'lodash.debounce';
 import countryCard from '../templates/countries.hbs';
 import listCountries from '../templates/listcountries';
+import Notiflix from 'notiflix';
 
 const DEBOUNCE_DELAY = 300;
 const refs = {
@@ -13,22 +14,32 @@ refs.input.addEventListener('input', debounce(onInputClick, DEBOUNCE_DELAY));
 
 function onInputClick(evt) {
   const searchCountry = evt.target.value;
-  fetchCountry(searchCountry)
-    .then(renderInform)
-    .catch(error => console.log('error'));
+  fetchCountry(searchCountry).then(renderInform).catch(onFetchError);
 }
 
 function fetchCountry(name) {
   return fetch(`https://restcountries.com/v3.1/name/${name}`).then(response => {
+    if (!response.ok) {
+      throw new Error(response.status);
+    }
     return response.json();
   });
 }
 
 function renderInform(countryInfo) {
   if (countryInfo.length === 1) {
+    viewContry();
     return renderCountry(countryInfo);
   }
-  renderListCountries(countryInfo);
+  viewContries();
+  return renderListCountries(countryInfo);
+}
+
+function onFetchError(error) {
+  // alert('fuck');
+  Notiflix.Notify.failure('Oops, there is no country with that name');
+  // Notiflix.Report.warning('Oops, there is no country with that name');
+  // Notiflix.Notify.warning('Oops, there is no country with that name');
 }
 
 function renderListCountries(countries) {
@@ -40,4 +51,14 @@ function renderListCountries(countries) {
 function renderCountry(country) {
   const markup = countryCard(...country);
   refs.countryInform.innerHTML = markup;
+}
+
+function viewContry() {
+  refs.countryInform.classList.remove('hidden');
+  refs.countryList.classList.add('hidden');
+}
+
+function viewContries() {
+  refs.countryInform.classList.add('hidden');
+  refs.countryList.classList.remove('hidden');
 }
