@@ -31,15 +31,20 @@ function renderInform(countryInfo) {
     viewContry();
     return renderCountry(countryInfo);
   }
+  if (countryInfo.length >= 10) {
+    return onFetchOops();
+  }
   viewContries();
   return renderListCountries(countryInfo);
 }
 
 function onFetchError(error) {
-  // alert('fuck');
   Notiflix.Notify.failure('Oops, there is no country with that name');
-  // Notiflix.Report.warning('Oops, there is no country with that name');
-  // Notiflix.Notify.warning('Oops, there is no country with that name');
+}
+
+function onFetchOops(oops) {
+  clearCountries();
+  Notiflix.Notify.info('Too many matches found. Please enter a more specific name.');
 }
 
 function renderListCountries(countries) {
@@ -61,4 +66,9 @@ function viewContry() {
 function viewContries() {
   refs.countryInform.classList.add('hidden');
   refs.countryList.classList.remove('hidden');
+}
+
+function clearCountries() {
+  refs.countryInform.classList.add('hidden');
+  refs.countryList.classList.add('hidden');
 }
