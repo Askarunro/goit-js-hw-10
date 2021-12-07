@@ -42,3 +42,7 @@ body {
 .hidden {
   display: none;
 }
+
+h1 {
+  margin-left: 30px;
+}
